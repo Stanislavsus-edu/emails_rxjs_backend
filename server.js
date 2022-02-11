@@ -14,6 +14,7 @@ app.use(
     origin: '*',
     credentials: true,
     'Access-Control-Allow-Origin': true,
+    "X-Requested-With": true, 
     allowMethods: ['GET'],
   })
 );
