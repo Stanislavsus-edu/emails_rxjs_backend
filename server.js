@@ -6,6 +6,7 @@ const cors = require('koa2-cors');
 const faker = require('faker');
 
 const app = new Koa();
+
 app.use(koaBody({ json: true, text: true, urlencoded: true }));
 
 app.use(
@@ -17,15 +18,12 @@ app.use(
   })
 );
 
-const port = process.env.PORT || 7070;
-const server = http.createServer(app.callback());
-
 const router = new Router();
 faker.locale = "ru";
 
 router.get('/messages/unread', async (ctx) => {
   const messages = [];
-    
+  
   const random = Math.floor(Math.random() * 4);
   for (let i = 0; i < random; i +=1) {
     const message = {
@@ -48,4 +46,6 @@ router.get('/messages/unread', async (ctx) => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
+const port = process.env.PORT || 7070;
+const server = http.createServer(app.callback());
 server.listen(port, () => console.log('Server started'));
